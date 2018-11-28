@@ -8,8 +8,14 @@ const ResultView = function () {
 ResultView.prototype.bindEvents = function () {
   PubSub.subscribe('CountryData:single-country-data', (event) => {
     this.country = event.detail;
+    this.deleteCountry();
     this.displayCountry();
   });
+};
+
+ResultView.prototype.deleteCountry = function () {
+  const div = document.querySelector('#country');
+  div.textContent = '';
 };
 
 ResultView.prototype.displayCountry = function () {
