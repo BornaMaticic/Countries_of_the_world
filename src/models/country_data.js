@@ -11,6 +11,16 @@ CountryData.prototype.bindEvents = function () {
     this.countryData = data;
     PubSub.publish('CountryData:country-data-loaded', this.countryData);
   })
+
+  PubSub.subscribe('SelectView:selected-country', (event) => {
+    let data = null;
+    for (country of this.countryData) {
+      if (country.name === event.detail) {
+        data = country;
+      }
+    }
+    PubSub.publish('CountryData:single-country-data', data);
+  });
 };
 
 module.exports = CountryData;

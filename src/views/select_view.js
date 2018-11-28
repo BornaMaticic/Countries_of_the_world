@@ -8,6 +8,10 @@ SelectView.prototype.bindEvents = function () {
   PubSub.subscribe('CountryData:country-data-loaded', (data) => {
     this.populate(data.detail);
   })
+  const dropDown = document.querySelector('#countries');
+  dropDown.addEventListener('change', (event) => {
+    PubSub.publish('SelectView:selected-country', event.target.value);
+  });
 };
 
 SelectView.prototype.populate = function (data) {
